@@ -1,0 +1,21 @@
+Setting.php
+.idea
+
+#Logs and databases #
+######################
+*.data
+*.csv
+*.log
+*.sql
+*.sqlite
+*/Data/*
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
