@@ -26,6 +26,11 @@ class Api
         return $this->_request("users.list",array());
     }
 
+    public function postMessage($data)
+    {
+        return $this->_request('chat.postMessage',$data);
+    }
+
     /**
      *
      * @param $method
@@ -33,7 +38,10 @@ class Api
      */
     private function _request($method,$postData = array())
     {
-        $postData['token'] = SETTING::API_AUTH_TOKEN;
+        if(empty($postData['token']))
+        {
+            $postData['token'] = SETTING::API_AUTH_TOKEN;
+        }
 
         $data_string = '';
         foreach($postData as $key=>$value)
@@ -83,12 +91,25 @@ class Api
         $filteredMessages = array();
         foreach($messages as $message)
         {
-            $senderFilter = in_array($message->user,$messageSenderFilter);
+            //Skip Bot message
+            if(isset($message->subtype) && $message->subtype == 'bot_message') {
+                continue;
+            }
+
+            //Skip API message
+            if(!isset($message->user))
+            {
+                continue;
+            }
+
+            if(in_array($message->user,$messageSenderFilter))
+            {
+                continue;
+            }
+
             foreach($messagePhaseFilter as $filter)
             {
-                if(preg_match('/\b('.$filter.')\b/', $message->text) == true
-                   && !$senderFilter
-                )
+                if(preg_match('/\b('.$filter.')\b/', $message->text) == true)
                 {
                     $filteredMessages[] = $message;
                     break;
