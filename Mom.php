@@ -18,7 +18,7 @@ class Mom {
         {
             $channelId = SETTING::THE_TEST_CHANNEL;
             $channelName = SETTING::THE_TEST_CHANNEL_NAME;
-            $option['oldest'] = time()-60;
+            $option['oldest'] = time()-60000;
         }
         else
         {

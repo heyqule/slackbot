@@ -86,7 +86,7 @@ class Api
             $senderFilter = in_array($message->user,$messageSenderFilter);
             foreach($messagePhaseFilter as $filter)
             {
-                if(stripos($message->text,$filter) !== false
+                if(preg_match('/\b('.$filter.')\b/', $message->text) == true
                    && !$senderFilter
                 )
                 {
