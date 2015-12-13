@@ -56,7 +56,14 @@ class Mom {
             foreach($filteredMessages as $msg)
             {
                 $member = $userList->getMemberById($msg->user);
-                $selectedUsers[$member->id] = $member->name;
+                if(isset($member->real_name))
+                {
+                    $selectedUsers[$member->id] = $member->real_name;
+                }
+                else
+                {
+                    $selectedUsers[$member->id] = $member->name;
+                }
             }
 
             $numOfMomCalls = count($selectedUsers);
