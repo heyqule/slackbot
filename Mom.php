@@ -102,9 +102,9 @@ class Mom {
         }
 
         $messages = array_merge($messages, array (
-            "WHAT DO YOU WANT?! I am washing dishes!",
+            "WHAT DO YOU WANT?! I am washing ".$userName."'s dishes!",
             "GTFO! I am dancing with ".$userName."!",
-            "STFU and go clean your room!",
+            "STFU and go clean ".$userName."'s room!",
             "I am eating banana. Do you want one?",
             "Get down here for dinner!",
             "I am washing ".$userName.".",
