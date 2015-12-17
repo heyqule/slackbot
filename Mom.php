@@ -7,7 +7,7 @@
  */
 namespace Slackbot;
 
-require_once "SlackUser.php";
+require_once "SlackUserCollection.php";
 
 class Mom {
 
@@ -18,7 +18,7 @@ class Mom {
         {
             $channelId = SETTING::THE_TEST_CHANNEL;
             $channelName = SETTING::THE_TEST_CHANNEL_NAME;
-            $option['oldest'] = time()-6000;
+            $option['oldest'] = time()-60;
         }
         else
         {
@@ -49,21 +49,14 @@ class Mom {
         $filteredMessages = $api->filterMessages($result->messages,$wordTriggers,$excludeUsers);
         if(count($filteredMessages))
         {
-            $userList = new SlackUser();
+            $userList = new SlackUserCollection();
 
             $selectedUsers = array();
 
             foreach($filteredMessages as $msg)
             {
                 $member = $userList->getMemberById($msg->user);
-                if(isset($member->real_name))
-                {
-                    $selectedUsers[$member->id] = $member->real_name;
-                }
-                else
-                {
-                    $selectedUsers[$member->id] = $member->name;
-                }
+                $selectedUsers[$member->id] = $userList->getName($member);
             }
 
             $numOfMomCalls = count($selectedUsers);
@@ -71,7 +64,7 @@ class Mom {
             $userStr = implode(', ',$selectedUsers);
 
             //If mom is there, send message
-            $message = $this->getMomMessage($numOfMomCalls)." ".$userStr;
+            $message = "hey ".$userStr." ".$this->getMomMessage($numOfMomCalls);
 
             $data = array(
                 'channel' => $channelId,
@@ -95,29 +88,27 @@ class Mom {
      */
     protected function getMomMessage($numOfCalls)
     {
+        $userList = new SlackUserCollection();
+        $user = $userList->getRandomMember();
+        $userName = $user->getName($user);
         $messages = array();
-        if($numOfCalls > 2)
+        if($numOfCalls > 1)
         {
             $messages = array (
                 "I am annoyed at you noisy kids!",
-                "If you kids don't stfu, I will lock you into a container and ship you to north pole to feed polar bears."
-            );
-        }
-        else if($numOfCalls == 2)
-        {
-            $messages = array (
-                "You 2 stop fking around!",
-                "Mommy gonna record a dank dank dance video with you 2!",
+                "If you kids don't stfu, I will lock you into a container and ship you to north pole to feed polar bears.",
+                "Mommy gonna record a dank dank dance video with you!",
             );
         }
 
         $messages = array_merge($messages, array (
             "WHAT DO YOU WANT?! I am washing dishes!",
-            "GTFO! I am dancing with this handsome dude!",
+            "GTFO! I am dancing with ".$userName."!",
             "STFU and go clean your room!",
             "I am eating banana. Do you want one?",
-            "I am washing corey.",
-            "I am gonna smack you with meatloaf",
+            "Get down here for dinner!",
+            "I am washing ".$userName.".",
+            "I am gonna smack you with meatloaf.",
         ));
 
         return $messages[rand(0,count($messages)-1)];

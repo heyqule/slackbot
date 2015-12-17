@@ -6,7 +6,7 @@
  * Time: 8:16 PM
  */
 
-require_once 'SlackUser.php';
+require_once 'SlackUserCollection.php';
 $runner = new \Slackbot\SlackUser();
 $runner->update();
 

@@ -10,7 +10,7 @@ namespace Slackbot;
 require_once "Setting.php";
 require_once "Api.php";
 
-class SlackUser
+class SlackUserCollection
 {
     static protected $dataCache;
 
@@ -51,17 +51,13 @@ class SlackUser
     {
         $this->readMemberData();
 
-        if(empty(self::$dataCache) || empty(self::$dataCache->$id))
+        if(empty(self::$dataCache) || empty(self::$dataCache[$id]))
         {
-            $newb = new \stdClass();
-            $newb->id = "UNEWB";
-            $newb->name = "newb";
-            $newb->real_name = "A newb";
-            return $newb;
+            return $this->getNewb();
         }
         else
         {
-            return self::$dataCache->$id;
+            return self::$dataCache[$id];
         }
 
     }
@@ -70,9 +66,53 @@ class SlackUser
     {
         if(empty(self::$dataCache))
         {
-            $fileHandler = fopen(SETTING::MEMBER_CACHE_FILE,'r');
-            self::$dataCache = json_decode(fgets($fileHandler));
+            $fileHandler = fopen(__DIR__.'/'.SETTING::MEMBER_CACHE_FILE,'r');
+            $rawObj = json_decode(fgets($fileHandler));
+            $formattedArray = array();
+            foreach(get_object_vars($rawObj) as $key => $value)
+            {
+                $formattedArray[$key] = $value;
+            }
+
+            self::$dataCache = $formattedArray;
             fclose($fileHandler);
+        }
+    }
+
+    public function getNewb()
+    {
+        $newb = new \stdClass();
+        $newb->id = "UNEWB";
+        $newb->name = "newb";
+        $newb->real_name = "newb";
+        return $newb;
+    }
+
+    public function getMemberRandomly()
+    {
+        $this->readMemberData();
+
+        if(is_array(self::$dataCache) && $keyCount = count(self::$dataCache))
+        {
+            $keys = array_keys(self::$dataCache);
+            $selectedKey = $keys[rand(0,$keyCount - 1)];
+            return self::$dataCache[$selectedKey];
+        }
+        else
+        {
+            return $this->getNewb();
+        }
+    }
+
+    public function getName($member)
+    {
+        if(isset($member->real_name))
+        {
+            return $member->real_name;
+        }
+        else
+        {
+            return $member->name;
         }
     }
 }
