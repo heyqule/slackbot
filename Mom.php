@@ -76,8 +76,6 @@ class Mom {
             );
             $api = new Api();
             $api->postMessage($data);
-
-            //$api->slackBotSendMessage($message,$channelName);
         }
     }
 
@@ -89,8 +87,8 @@ class Mom {
     protected function getMomMessage($numOfCalls)
     {
         $userList = new SlackUserCollection();
-        $user = $userList->getRandomMember();
-        $userName = $user->getName($user);
+        $user = $userList->getMemberRandomly();
+        $userName = $userList->getName($user);
         $messages = array();
         if($numOfCalls > 1)
         {

@@ -28,7 +28,9 @@ class Api
 
     public function postMessage($data)
     {
-        return $this->_request('chat.postMessage',$data);
+        $response = $this->_request('chat.postMessage',$data);
+        sleep(1);
+        return $response;
     }
 
     /**
