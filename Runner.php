@@ -7,7 +7,7 @@
  */
 
 require_once 'SlackUserCollection.php';
-$runner = new \Slackbot\SlackUser();
+$runner = new \Slackbot\SlackUserCollection();
 $runner->update();
 
 require_once 'Mom.php';
