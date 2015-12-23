@@ -16,22 +16,23 @@ class SlackUserCollection
 
     public function update()
     {
-        if(!file_exists(SETTING::MEMBER_CACHE_FILE))
+        $finalPath = __DIR__.'/'.SETTING::MEMBER_CACHE_FILE;
+        if(!file_exists($finalPath))
         {
-            touch(SETTING::MEMBER_CACHE_FILE);
-            $this->updateMemberData();
+            touch($finalPath);
+            $this->updateMemberData($finalPath);
             return;
         }
 
-        if(time() > filemtime(SETTING::MEMBER_CACHE_FILE) + 7 * 24 * 3600)
+        if(time() > filemtime($finalPath) + 7 * 24 * 3600)
         {
-            $this->updateMemberData();
+            $this->updateMemberData($finalPath);
         }
     }
 
-    public function updateMemberData()
+    public function updateMemberData($finalPath)
     {
-        $fileHandler = fopen(SETTING::MEMBER_CACHE_FILE,'w');
+        $fileHandler = fopen($finalPath,'w');
         $api = new Api();
         $users = $api->getUserList();
         if($users->ok && $users->members)
