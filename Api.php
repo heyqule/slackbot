@@ -16,11 +16,6 @@ class Api
         return $this->_request("channels.history",$data);
     }
 
-    public function getChannelData($data)
-    {
-        return $this->_request("channels.history", $data);
-    }
-
     public function getUserList()
     {
         return $this->_request("users.list",array());
