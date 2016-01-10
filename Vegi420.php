@@ -61,7 +61,9 @@ class Vegi420
             'https://www.youtube.com/watch?v=QZXc39hT8t4',
             'https://www.youtube.com/watch?v=ibi8m_fkW_Q',
             'https://www.youtube.com/watch?v=3MKIsuw2ea0',
+            'https://www.youtube.com/watch?v=pHW5Vz0HgRE',
         );
-        return $messages[rand(0,count($messages)-1)];
+        shuffle($messages);
+        return $messages[0];
     }
 }

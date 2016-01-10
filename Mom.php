@@ -109,6 +109,7 @@ class Mom {
             "I am gonna smack you with meatloaf.",
         ));
 
-        return $messages[rand(0,count($messages)-1)];
+        shuffle($messages);
+        return $messages[0];
     }
 }
