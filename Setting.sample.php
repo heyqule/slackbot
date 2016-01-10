@@ -6,7 +6,7 @@
  * Time: 6:13 PM
  */
 namespace Slackbot;
-class SETTING {
+class Setting {
     const MEMBER_CACHE_FILE = 'something.cache';
     const TIME_ZONE = 'America/Toronto';
     const TEST = false;

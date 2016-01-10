@@ -16,7 +16,7 @@ class SlackUserCollection
 
     public function update()
     {
-        $finalPath = __DIR__.'/'.SETTING::MEMBER_CACHE_FILE;
+        $finalPath = __DIR__.'/'.Setting::MEMBER_CACHE_FILE;
         if(!file_exists($finalPath))
         {
             touch($finalPath);
@@ -67,7 +67,7 @@ class SlackUserCollection
     {
         if(empty(self::$dataCache))
         {
-            $fileHandler = fopen(__DIR__.'/'.SETTING::MEMBER_CACHE_FILE,'r');
+            $fileHandler = fopen(__DIR__.'/'.Setting::MEMBER_CACHE_FILE,'r');
             $rawObj = json_decode(fgets($fileHandler));
             $formattedArray = array();
             foreach(get_object_vars($rawObj) as $key => $value)

@@ -37,7 +37,7 @@ class Api
     {
         if(empty($postData['token']))
         {
-            $postData['token'] = SETTING::API_AUTH_TOKEN;
+            $postData['token'] = Setting::API_AUTH_TOKEN;
         }
 
         $data_string = '';
@@ -54,7 +54,7 @@ class Api
         $result = curl_exec($ch);
         curl_close($ch);
 
-        if(SETTING::DEBUG_API)
+        if(Setting::DEBUG_API)
         {
             echo $result."\n";
         }
@@ -68,7 +68,7 @@ class Api
      */
     public function slackBotSendMessage($message,$channel)
     {
-        $postUrl = SETTING::SLACKBOT_POST_URL."&channel=%23".urlencode($channel);
+        $postUrl = Setting::SLACKBOT_POST_URL."&channel=%23".urlencode($channel);
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL, $postUrl);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $message);

@@ -14,15 +14,15 @@ class Vegi420
 
     public function run()
     {
-        date_default_timezone_set(SETTING::TIME_ZONE);
+        date_default_timezone_set(Setting::TIME_ZONE);
 
-        if(SETTING::TEST)
+        if(Setting::TEST)
         {
-            $channel = SETTING::THE_TEST_CHANNEL;
+            $channel = Setting::THE_TEST_CHANNEL;
         }
         else
         {
-            $channel = SETTING::THE_B_CHANNEL;
+            $channel = Setting::THE_B_CHANNEL;
         }
         $currentTime = date('H:i',time());
         if($currentTime == "16:20")

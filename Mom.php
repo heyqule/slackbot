@@ -14,16 +14,16 @@ class Mom {
     public function run()
     {
 
-        if(SETTING::TEST)
+        if(Setting::TEST)
         {
-            $channelId = SETTING::THE_TEST_CHANNEL;
-            $channelName = SETTING::THE_TEST_CHANNEL_NAME;
+            $channelId = Setting::THE_TEST_CHANNEL;
+            $channelName = Setting::THE_TEST_CHANNEL_NAME;
             $option['oldest'] = time()-60;
         }
         else
         {
-            $channelId = SETTING::THE_B_CHANNEL;
-            $channelName = SETTING::THE_B_CHANNEL_NAME;
+            $channelId = Setting::THE_B_CHANNEL;
+            $channelName = Setting::THE_B_CHANNEL_NAME;
             $option['oldest'] = time()-60;
         }
 
