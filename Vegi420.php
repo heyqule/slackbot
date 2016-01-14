@@ -43,27 +43,8 @@ class Vegi420
 
     public function getMessages()
     {
-        $messages = array(
-            'https://media.giphy.com/media/kJ9EUAWChKNbO/giphy.gif',
-            'https://media.giphy.com/media/hop9gooDLQ3XW/giphy.gif',
-            'https://media.giphy.com/media/eyRSfBFqkCfSw/giphy.gif',
-            'https://media.giphy.com/media/11uVVMtvZCtlzq/giphy.gif',
-            'https://media.giphy.com/media/MQT9vTxyUFyrS/giphy.gif',
-            'https://media.giphy.com/media/gWguckWa8IycM/giphy.gif',
-            'https://media.giphy.com/media/TUyujF6T08z6w/giphy.gif',
-            'https://media.giphy.com/media/wn2WibO09eCpW/giphy.gif',
-            'https://media.giphy.com/media/BtKp18bFRRONi/giphy.gif',
-            'https://media.giphy.com/media/wwnnXHSZKHpjq/giphy.gif',
-            'https://media.giphy.com/media/gBASVF4VyyPjG/giphy.gif',
-            'https://media.giphy.com/media/urET4ZcL1Abu0/giphy.gif',
-            'https://media.giphy.com/media/BdR7LApFzvNok/giphy.gif',
-            'https://www.youtube.com/watch?v=ltZ6dtr1Abo',
-            'https://www.youtube.com/watch?v=wHwyca7gu7E',
-            'https://www.youtube.com/watch?v=QZXc39hT8t4',
-            'https://www.youtube.com/watch?v=ibi8m_fkW_Q',
-            'https://www.youtube.com/watch?v=3MKIsuw2ea0',
-            'https://www.youtube.com/watch?v=pHW5Vz0HgRE',
-        );
+
+        $messages = file('vegi420.list');
         shuffle($messages);
         return $messages[0];
     }
