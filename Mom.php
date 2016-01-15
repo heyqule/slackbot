@@ -39,7 +39,6 @@ class Mom {
         $excludeUsers = array('USLACKBOT');
 
         $result = $api->getChannelMessages($data);
-
         if(!$result->ok || empty($result->messages))
         {
             return;
@@ -59,12 +58,10 @@ class Mom {
                 $selectedUsers[$member->id] = $userList->getName($member);
             }
 
-            $numOfMomCalls = count($selectedUsers);
-
             $userStr = implode(', ',$selectedUsers);
 
             //If mom is there, send message
-            $message = "hey ".$userStr." ".$this->getMomMessage($numOfMomCalls);
+            $message = "hey ".$userStr." ".$this->getMomMessage();
 
             $data = array(
                 'channel' => $channelId,
@@ -80,36 +77,16 @@ class Mom {
     }
 
     /**
-     * @TODO To be optimized
      * @param $numOfCalls
      * @return mixed
      */
-    protected function getMomMessage($numOfCalls)
+    protected function getMomMessage()
     {
         $userList = new SlackUserCollection();
         $user = $userList->getMemberRandomly();
         $userName = $userList->getName($user);
-        $messages = array();
-        if($numOfCalls > 1)
-        {
-            $messages = array (
-                "I am annoyed at you noisy kids!",
-                "If you kids don't stfu, I will lock you into a container and ship you to north pole to feed polar bears.",
-                "Mommy gonna record a dank dank dance video with you!",
-            );
-        }
-
-        $messages = array_merge($messages, array (
-            "WHAT DO YOU WANT?! I am washing ".$userName."'s dishes!",
-            "GTFO! I am dancing with ".$userName."!",
-            "STFU and go clean ".$userName."'s room!",
-            "I am eating banana. Do you want one?",
-            "Get down here for dinner!",
-            "I am washing ".$userName.".",
-            "I am gonna smack you with meatloaf.",
-        ));
-
+        $messages = file('./mom.list');
         shuffle($messages);
-        return $messages[0];
+        return str_replace("{username}",$userName,$messages[0]);
     }
 }

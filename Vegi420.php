@@ -27,7 +27,7 @@ class Vegi420
         $currentTime = date('H:i',time());
         if($currentTime == "16:20")
         {
-            $message = $this->getMessages();
+            $message = $this->getMessage();
             $data = array(
                 'channel' => $channel,
                 'text' => $message,
@@ -41,10 +41,9 @@ class Vegi420
         }
     }
 
-    public function getMessages()
+    public function getMessage()
     {
-
-        $messages = file('vegi420.list');
+        $messages = file('./vegi420.list');
         shuffle($messages);
         return $messages[0];
     }
