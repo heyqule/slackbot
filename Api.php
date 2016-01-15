@@ -106,7 +106,7 @@ class Api
 
             foreach($messagePhaseFilter as $filter)
             {
-                if(preg_match('/\b('.$filter.')\b/', $message->text) == true)
+                if(preg_match('/\b('.$filter.')\b/i', $message->text) == true)
                 {
                     $filteredMessages[] = $message;
                     break;

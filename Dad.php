@@ -9,7 +9,7 @@ namespace Slackbot;
 
 require_once "SlackUserCollection.php";
 
-class Mom {
+class Dad {
 
     public function run()
     {
@@ -35,7 +35,7 @@ class Mom {
            'inclusive' => 1.
         ));
 
-        $wordTriggers = array('mom','m0m','mama','mommy');
+        $wordTriggers = array('dad','papa','daddy');
         $excludeUsers = array('USLACKBOT');
 
         $result = $api->getChannelMessages($data);
@@ -66,10 +66,10 @@ class Mom {
             $data = array(
                 'channel' => $channelId,
                 'text' => $message,
-                'username' => 'Mom',
+                'username' => 'Daddy',
                 'parse' => 'full',
                 'link_names' => 1,
-                'icon_url' => 'http://i.imgur.com/uPpUECV.jpg'
+                'icon_url' => 'https://pbs.twimg.com/profile_images/657374406583427072/18heBymO.jpg'
             );
             $api = new Api();
             $api->postMessage($data);
@@ -85,7 +85,7 @@ class Mom {
         $userList = new SlackUserCollection();
         $user = $userList->getMemberRandomly();
         $userName = $userList->getName($user);
-        $messages = file(__DIR__.'/mom.list');
+        $messages = file(__DIR__.'/dad.list');
         shuffle($messages);
         return str_replace("{username}",$userName,$messages[0]);
     }

@@ -14,6 +14,10 @@ require_once 'Mom.php';
 $runner = new \Slackbot\Mom();
 $runner->run();
 
+require_once 'Dad.php';
+$runner = new \Slackbot\Dad();
+$runner->run();
+
 
 require_once 'Vegi420.php';
 $runner = new \Slackbot\Vegi420();
