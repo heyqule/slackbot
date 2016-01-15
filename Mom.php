@@ -85,7 +85,7 @@ class Mom {
         $userList = new SlackUserCollection();
         $user = $userList->getMemberRandomly();
         $userName = $userList->getName($user);
-        $messages = file('./mom.list');
+        $messages = file(__DIR__.'/mom.list');
         shuffle($messages);
         return str_replace("{username}",$userName,$messages[0]);
     }

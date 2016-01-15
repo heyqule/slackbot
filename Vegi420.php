@@ -43,7 +43,7 @@ class Vegi420
 
     public function getMessage()
     {
-        $messages = file('./vegi420.list');
+        $messages = file(__DIR__.'/vegi420.list');
         shuffle($messages);
         return $messages[0];
     }
