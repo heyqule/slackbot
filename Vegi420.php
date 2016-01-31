@@ -7,44 +7,38 @@
  */
 
 namespace Slackbot;
-require_once "SlackUserCollection.php";
+require_once "ThatBot.php";
 
-class Vegi420
+class Vegi420 extends ThatBot
 {
+    public function __construct()
+    {
+        $this->_listFile = 'vegi420.list';
+        $this->_user = '420';
+        $this->_userIcon = 'http://i183.photobucket.com/albums/x46/rebelrhoads/MarijuanaLeafPeaceSymbol.jpg';
+
+        parent::__construct();
+    }
 
     public function run()
     {
         date_default_timezone_set(Setting::TIME_ZONE);
 
-        if(Setting::TEST)
-        {
-            $channel = Setting::THE_TEST_CHANNEL;
-        }
-        else
-        {
-            $channel = Setting::THE_B_CHANNEL;
-        }
+        $channel = $this->_getChannel();
+
         $currentTime = date('H:i',time());
         if($currentTime == "16:20")
         {
-            $message = $this->getMessage();
+            $message = $this->_getMessage();
             $data = array(
                 'channel' => $channel,
                 'text' => $message,
-                'username' => '420',
+                'username' => $this->_user,
                 'parse' => 'full',
                 'link_names' => 1,
-                'icon_url' => 'http://i183.photobucket.com/albums/x46/rebelrhoads/MarijuanaLeafPeaceSymbol.jpg'
+                'icon_url' => $this->_userIcon
             );
-            $api = new Api();
-            $api->postMessage($data);
+            $this->_postMessage($data);
         }
-    }
-
-    public function getMessage()
-    {
-        $messages = file(__DIR__.'/vegi420.list');
-        shuffle($messages);
-        return $messages[0];
     }
 }

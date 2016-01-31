@@ -96,8 +96,8 @@ class SlackUserCollection
         if(is_array(self::$dataCache) && $keyCount = count(self::$dataCache))
         {
             $keys = array_keys(self::$dataCache);
-            $selectedKey = $keys[rand(0,$keyCount - 1)];
-            return self::$dataCache[$selectedKey];
+            shuffle($keys);
+            return self::$dataCache[$keys[0]];
         }
         else
         {

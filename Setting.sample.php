@@ -9,8 +9,9 @@ namespace Slackbot;
 class Setting {
     const MEMBER_CACHE_FILE = 'something.cache';
     const TIME_ZONE = 'America/Toronto';
-    const TEST = false;
-    const DEBUG_API = false;
+    const TEST = true;
+    const DEV_TEST = true;
+    const DEBUG_API = true;
 
     const SLACKBOT_POST_URL = "https://{domain}.slack.com/services/hooks/slackbot?token={token_goes_here}";
     const API_AUTH_TOKEN = '';
