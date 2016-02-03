@@ -103,11 +103,11 @@ abstract class ThatFamily extends ThatBot {
     {
         if(Setting::TEST)
         {
-            $option['oldest'] = time()-60*60*24;
+            return time()-60*60*24;
         }
         else
         {
-            $option['oldest'] = time()-60;
+            return time()-60;
         }
     }
 }
