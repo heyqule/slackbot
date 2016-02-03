@@ -24,7 +24,7 @@ class SlackUserCollection
             return;
         }
 
-        if(time() > filemtime($finalPath) + 7 * 24 * 3600)
+        if(time() > filemtime($finalPath) + 24 * 3600)
         {
             $this->updateMemberData($finalPath);
         }
