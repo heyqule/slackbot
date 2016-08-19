@@ -19,7 +19,7 @@ class Dad extends ThatFamily {
         $this->_excludedUsers = array('USLACKBOT');
         $this->_listFile = 'dad.list';
         $this->_user = 'Dad';
-        $this->_userIcon = 'https://pbs.twimg.com/profile_images/657374406583427072/18heBymO.jpg';
+        $this->_userIcon = 'http://i.dailymail.co.uk/i/pix/2013/04/24/article-2313925-0D3F527A00000578-151_306x345.jpg';
         parent::__construct();
     }
 }

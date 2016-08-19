@@ -21,6 +21,11 @@ class Api
         return $this->_request("users.list",array());
     }
 
+    public function getChannelList()
+    {
+        return $this->_request("channels.list",array());
+    }
+
     public function postMessage($data)
     {
         $response = $this->_request('chat.postMessage',$data);
